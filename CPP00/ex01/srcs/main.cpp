@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:49:08 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/05 09:42:59 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/05 10:19:32 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	print_screen(void)
 static std::string	prompt_input(const std::string& prompt)
 {
 	std::string	input;
-	
+
 	std::cout << prompt;
 	std::getline(std::cin, input);
 	return input;
@@ -51,20 +51,36 @@ int main(void)
 			Contact		contact = Contact();
 			std::string	input;
 
-			std::cout << std::endl;
-			while ((input = prompt_input("\e[1A\e[2KFirst name: ")).empty())
-				std::cout << "\e[1A\e[2KPlease enter a valid first name" << std::endl;
+			while ((input = prompt_input("First name: ")).empty())
+				std::cout << "\e[u\e[0J\e[1;31mFirst name cannot be empty !\e[0m" << std::endl;
 			contact.setFirstName(input);
-			
+			std::cout << "\e[u\e[0J";
+			while ((input = prompt_input("Last name: ")).empty())
+				std::cout << "\e[u\e[0J\e[1;31mLast name cannot be empty !\e[0m" << std::endl;
+			contact.setLastName(input);
+			std::cout << "\e[u\e[0J";
+			while ((input = prompt_input("Nickname: ")).empty())
+				std::cout << "\e[u\e[0J\e[1;31mNickname cannot be empty !\e[0m" << std::endl;
+			contact.setNickname(input);
+			std::cout << "\e[u\e[0J";
+			while ((input = prompt_input("Phone number: ")).empty())
+				std::cout << "\e[u\e[0J\e[1;31mPhone number cannot be empty !\e[0m" << std::endl;
+			contact.setPhoneNumber(input);
+			std::cout << "\e[u\e[0J";
+			while ((input = prompt_input("Darkest Secret: ")).empty())
+				std::cout << "\e[u\e[0J\e[1;31mDarkest Secret cannot be empty !\e[0m" << std::endl;
+			contact.setDarkestSecret(input);
+			std::cout << "\e[u\e[0J";
+
 			phoneBook.add(contact);
-			std::cout << "\e[1A\e[2K\rContact added" << std::endl;
+			std::cout << "Contact added successfully !" << std::endl;
 		}
 		else if (command == "SEARCH")
 		{
 			Contact		query;
 			std::string	input;
 			int			index = 0;
-			
+
 			phoneBook.print();
 			if (phoneBook.getContactCount() < 1) continue;
 			std::cout << std::endl << "Index ? ";
