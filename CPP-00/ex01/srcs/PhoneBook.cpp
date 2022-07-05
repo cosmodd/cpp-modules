@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:46:36 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/04 15:52:40 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/05 08:41:41 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ PhoneBook& PhoneBook::operator=(const PhoneBook& rhs)
 	return *this;
 }
 
+// Getters
+
+int	PhoneBook::getContactCount(void) const
+{
+	return this->_contactCount;
+}
+
+// Methods
+
 void	PhoneBook::add(const Contact& contact)
 {
 	this->_contacts[this->_index] = contact;
@@ -43,6 +52,11 @@ void	PhoneBook::add(const Contact& contact)
 	if (this->_contactCount < 8)
 		this->_contactCount++;
 	return;
+}
+
+Contact&	PhoneBook::getContact(int index)
+{
+	return this->_contacts[index];
 }
 
 static std::string	truncateString(std::string str, int size)
@@ -55,7 +69,7 @@ static std::string	truncateString(std::string str, int size)
 	return (str);
 }
 
-void	PhoneBook::print(void)
+void	PhoneBook::print(void) const
 {
 	if (this->_contactCount == 0)
 	{

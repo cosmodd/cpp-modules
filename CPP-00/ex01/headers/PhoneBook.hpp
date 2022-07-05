@@ -20,10 +20,13 @@ class PhoneBook
 		~PhoneBook();
 		PhoneBook& operator=(const PhoneBook&);
 
+		// Getters
+		int		getContactCount(void) const;
+
 		// Methods
-		void	add(const Contact&);
-		Contact	get(int) const;
-		void	print(void);
+		void		add(const Contact&);
+		Contact&	getContact(int);
+		void		print(void) const;
 };
 
 #endif

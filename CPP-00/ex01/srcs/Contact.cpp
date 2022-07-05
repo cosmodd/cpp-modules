@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:36:59 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/04 14:24:10 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/05 09:08:01 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,10 @@ void	Contact::setDarkestSecret(const std::string& darkestSecret)
 void Contact::print(void) const
 {
 	// Prints all the contact's informations
+	std::cout << std::setw(14) << std::left << "First Name" << " : " << this->_firstName << std::endl;
+	std::cout << std::setw(14) << std::left << "Last Name" << " : " << this->_lastName << std::endl;
+	std::cout << std::setw(14) << std::left << "Nickname" << " : " << this->_nickname << std::endl;
+	std::cout << std::setw(14) << std::left << "Phone Number" << " : " << this->_phoneNumber << std::endl;
+	std::cout << std::setw(14) << std::left << "Darkest Secret" << " : " << this->_darkestSecret << std::endl;
 	return;
 }
