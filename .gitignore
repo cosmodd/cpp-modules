@@ -1,6 +1,7 @@
 # FOLDERS
 .vscode/
 logs/
+structure/
 
 # FILES
 *.o
@@ -9,3 +10,4 @@ logs/
 megaphone
 phonebook
 banking
+brainz
