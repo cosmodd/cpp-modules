@@ -1,6 +1,11 @@
-.vscode
+# FOLDERS
+.vscode/
+logs/
 
+# FILES
 *.o
 
+# EXECUTABLES
 megaphone
 phonebook
+banking
