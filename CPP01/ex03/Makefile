@@ -16,7 +16,7 @@ OBJS	=	$(SRCS:.cpp=.o)
 CXX			=	c++
 CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
-NAME		=	horde
+NAME		=	violence
 
 INCLUDES	=	-Iheaders
 LIBS		=
