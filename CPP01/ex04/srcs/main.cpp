@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:04:27 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 17:32:43 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/07 18:22:58 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ static std::string	 readFile(std::string filename)
 	return contentBuffer.str();
 }
 
+static bool	writeFile(std::string filename, std::string content)
+{
+	std::ofstream	fileWriter(filename, std::ofstream::trunc);
+
+	if (!fileWriter.is_open())
+		return false;
+	fileWriter << content;
+	fileWriter.close();
+	return true;
+}
+
 static std::string	replaceOccurences(std::string content, std::string search, std::string replace)
 {
 	std::string	replaced = "";
@@ -61,7 +72,6 @@ static std::string	replaceOccurences(std::string content, std::string search, st
 int	main(int ac, char** av)
 {
 	std::string			filename, search, replace, content;
-	std::ifstream		file;
 
 	if (ac < 4)
 	{
@@ -87,6 +97,8 @@ int	main(int ac, char** av)
 		error("Search may not be empty !");
 		return (EXIT_SUCCESS);
 	}
-	std::cout << replaceOccurences(content, search, replace);
+	content = replaceOccurences(content, search, replace);
+	if (!writeFile(filename + ".replace", content))
+		error("Error while writing file '" + filename + ".replace' !");
 	return (EXIT_SUCCESS);
 }
