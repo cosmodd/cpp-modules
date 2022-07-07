@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 14:31:49 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 08:38:24 by mrattez          ###   ########.fr       */
+/*   Created: 2022/07/07 08:28:58 by mrattez           #+#    #+#             */
+/*   Updated: 2022/07/07 08:52:05 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,42 @@
 Zombie::Zombie(void): _name("")
 {}
 
-Zombie::Zombie(std::string name):
-	_name(name)
+Zombie::Zombie(std::string name): _name(name)
 {}
 
 Zombie::Zombie(const Zombie& rhs)
 {
-	/* copy constructor */
 	(void) rhs;
-	return;
+	return ;
 }
 
 Zombie::~Zombie(void)
 {
 	std::cout << this->_name << " was killed !" << std::endl;
-	return;
+	return ;
 }
 
-Zombie& Zombie::operator=(const Zombie& rhs)
+Zombie& Zombie::operator=(const Zombie& ref)
 {
-	this->_name = rhs._name;
+	this->_name = ref.getName();
 	return *this;
 }
+
+// Getters
+
+std::string Zombie::getName(void) const
+{
+	return this->_name;
+}
+
+// Setters
+
+void	Zombie::setName(std::string newName)
+{
+	this->_name = newName;
+}
+
+// Methods
 
 void	Zombie::announce(void) const
 {
