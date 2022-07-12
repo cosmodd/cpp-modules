@@ -64,13 +64,16 @@ run: $(NAME)
 	@./$(NAME)
 
 debug:
+	@echo '$(INFO) Debugging project ! $(NOCOL)'
 	@make -sC ./ CXXFLAGS="${CXXFLAGS} -g -fsanitize=address" re
 
 clean:
 	@rm -f $(OBJS)
+	@echo '$(DEL) Removed $(words $(OBJS)) object files $(NOCOL)'
 
 fclean: clean
 	@rm -f $(NAME)
+	@echo '$(DEL) $(NAME) binary $(NOCOL)'
 
 re: fclean all
 
