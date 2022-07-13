@@ -1,7 +1,6 @@
 # FOLDERS
 .vscode/
 logs/
-structure/
 
 # FILES
 *.o
