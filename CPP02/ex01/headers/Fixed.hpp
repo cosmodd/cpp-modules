@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 12:43:21 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/13 08:51:35 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/13 13:31:08 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ class Fixed
 
 		// Getters
 		int	getRawBits(void) const;
-		int	getFractionalBits(void) const;
 
 		// Setters
 		void	setRawBits(int const raw);

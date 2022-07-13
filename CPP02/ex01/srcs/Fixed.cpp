@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 12:50:27 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/13 09:30:10 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/13 13:31:05 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,7 @@ Fixed& Fixed::operator=(const Fixed& ref)
 
 std::ostream&	operator<<(std::ostream& os, const Fixed& ref)
 {
-	int	integerPart = ref.getRawBits() >> ref.getFractionalBits();
-	int	fractionalPart = ref.getRawBits() & ((1 << ref.getFractionalBits()) - 1);
-	os << integerPart << "." << fractionalPart * 1000 / (1 << ref.getFractionalBits());
+	os << ref.toFloat();
 	return os;
 }
 
@@ -52,11 +50,6 @@ std::ostream&	operator<<(std::ostream& os, const Fixed& ref)
 int	Fixed::getRawBits(void) const
 {
 	return this->_fixedPointValue;
-}
-
-int	Fixed::getFractionalBits(void) const
-{
-	return this->_fractionalBits;
 }
 
 // Setters
@@ -70,7 +63,7 @@ void	Fixed::setRawBits(int const raw)
 
 float	Fixed::toFloat(void) const
 {
-	return ((float)this->_fixedPointValue) / (1 << Fixed::_fractionalBits);
+	return (float)this->_fixedPointValue / (1 << Fixed::_fractionalBits);
 }
 
 int		Fixed::toInt(void) const
