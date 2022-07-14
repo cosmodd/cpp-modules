@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 12:50:27 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/13 16:38:46 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/14 08:46:29 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,6 @@ bool	Fixed::operator>=(const Fixed& ref)
 	return (this->_fixedPointValue >= ref.getRawBits());
 }
 
-
-
 std::ostream&	operator<<(std::ostream& os, const Fixed& ref)
 {
 	os << ref.toFloat();
@@ -153,4 +151,32 @@ float	Fixed::toFloat(void) const
 int		Fixed::toInt(void) const
 {
 	return this->_fixedPointValue >> Fixed::_fractionalBits;
+}
+
+Fixed&	Fixed::max(Fixed& a, Fixed& b)
+{
+	if (a >= b)
+		return a;
+	return b;
+}
+
+const Fixed&	Fixed::max(const Fixed& a, const Fixed& b)
+{
+	if ((Fixed)a >= (Fixed)b)
+		return a;
+	return b;
+}
+
+Fixed&	Fixed::min(Fixed& a, Fixed& b)
+{
+	if (a <= b)
+		return a;
+	return b;
+}
+
+const Fixed&	Fixed::min(const Fixed& a, const Fixed& b)
+{
+	if ((Fixed)a <= (Fixed)b)
+		return a;
+	return b;
 }

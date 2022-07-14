@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/12 12:43:21 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/13 14:55:42 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/07/14 08:43:48 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ class Fixed
 		float	toFloat(void) const;
 		int		toInt(void) const;
 
-		static Fixed&	min(Fixed&, Fixed&);
-		static Fixed&	min(const Fixed&, const Fixed&);
-		static Fixed&	max(Fixed&, Fixed&);
-		static Fixed&	max(const Fixed&, const Fixed&);
+		static Fixed&		min(Fixed&, Fixed&);
+		static const Fixed&	min(const Fixed&, const Fixed&);
+		static Fixed&		max(Fixed&, Fixed&);
+		static const Fixed&	max(const Fixed&, const Fixed&);
 
 
 };
