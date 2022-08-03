@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ClapTrap.hpp                                       :+:      :+:    :+:   */
+/*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 12:54:52 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 13:36:38 by mrattez          ###   ########.fr       */
+/*   Created: 2022/07/14 14:53:41 by mrattez           #+#    #+#             */
+/*   Updated: 2022/08/03 11:40:15 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#ifndef DIAMONDTRAP_HPP
+# define DIAMONDTRAP_HPP
 
 #include <iostream>
 #include <string>
-#include <cmath>
+#include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 
-class ClapTrap
+class DiamondTrap: public FragTrap, public ScavTrap
 {
-	protected:
-		std::string		_name;
-		unsigned int	_hitPoints;
-		unsigned int	_energyPoints;
-		unsigned int	_attackDamage;
+	private:
+		std::string	_name;
 
 	public:
-		ClapTrap(void);
-		ClapTrap(std::string name);
-		ClapTrap(const ClapTrap&);
-		~ClapTrap(void);
-		ClapTrap& operator=(const ClapTrap&);
+		DiamondTrap(void);
+		DiamondTrap(std::string);
+		DiamondTrap(const DiamondTrap&);
+		~DiamondTrap(void);
+		DiamondTrap& operator=(const DiamondTrap&);
 
 		// Getters
 		std::string		getName(void) const;
@@ -40,15 +38,10 @@ class ClapTrap
 
 		// Setters
 		void	setName(std::string);
-		void	setHitPoints(unsigned int);
-		void	setEnergyPoints(unsigned int);
-		void	setAttackDamage(unsigned int);
 
 		// Methods
-		void	attack(const std::string& target);
-		void	takeDamage(unsigned int amount);
-		void	beRepaired(unsigned int amount);
-
+		void	whoAmI(void) const;
+		void	attack(const std::string &target);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 12:54:11 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 14:48:16 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/08/02 10:24:56 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 	{
 		ft.attack(target);
 		ft.beRepaired(1);
-		ft.highFiveGuys();
+		ft.highFivesGuys();
 		ft.takeDamage(1);
 		ft.beRepaired(2);
 	}

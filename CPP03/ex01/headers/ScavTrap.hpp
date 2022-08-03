@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 13:49:44 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 14:21:47 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/08/02 13:53:44 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 class ScavTrap: public ClapTrap
 {
 	private:
-		/* private members */
 
 	public:
+		ScavTrap(void);
 		ScavTrap(std::string name);
 		ScavTrap(const ScavTrap&);
 		~ScavTrap(void);

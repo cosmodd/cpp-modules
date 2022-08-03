@@ -1,35 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 12:54:11 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 10:30:41 by mrattez          ###   ########.fr       */
+/*   Created: 2022/07/14 13:49:44 by mrattez           #+#    #+#             */
+/*   Updated: 2022/08/03 09:48:29 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef SCAVTRAP_HPP
+# define SCAVTRAP_HPP
+
 #include "ClapTrap.hpp"
 
-int	main(void)
+class ScavTrap: virtual public ClapTrap
 {
-	ClapTrap	test("DALEK");
+	private:
 
-	for (int i = 0; i < 5; i++)
-	{
-		test.attack("DoctorWho");
-		test.beRepaired(4);
-		test.takeDamage(2);
-		std::cout << "----------" << std::endl;
-	}
+	public:
+		ScavTrap(void);
+		ScavTrap(std::string name);
+		ScavTrap(const ScavTrap&);
+		~ScavTrap(void);
+		ScavTrap& operator=(const ScavTrap&);
 
-	test.attack("DoctorWho");
-	test.beRepaired(20);
-	test.takeDamage(100);
-	test.attack("DoctorWho");
-	test.beRepaired(20);
+		// Getters
 
-	return EXIT_SUCCESS;
-}
+		// Setters
+
+		// Methods
+		void	attack(const std::string& target);
+		void	guardGate(void) const;
+
+};
+
+#endif

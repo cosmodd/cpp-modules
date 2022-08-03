@@ -6,30 +6,33 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 12:54:11 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 10:30:41 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/08/03 12:10:09 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include "ClapTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int	main(void)
 {
-	ClapTrap	test("DALEK");
+	const std::string	target = "DoctorWho";
+	DiamondTrap	dt("DALEK");
 
-	for (int i = 0; i < 5; i++)
+	dt.whoAmI();
+	std::cout << "HitPoints: " << dt.getHitPoints() << std::endl;
+	std::cout << "EnergyPoints: " << dt.getEnergyPoints() << std::endl;
+	std::cout << "AttackDamage: " << dt.getAttackDamage() << std::endl;
+
+	dt.guardGate();
+	dt.highFivesGuys();
+	std::cout << "HitPoints: " << dt.getHitPoints() << std::endl;
+	dt.takeDamage(dt.getAttackDamage());
+	std::cout << "HitPoints: " << dt.getHitPoints() << std::endl;
+	for (int i = 0; i < 50; i++)
 	{
-		test.attack("DoctorWho");
-		test.beRepaired(4);
-		test.takeDamage(2);
-		std::cout << "----------" << std::endl;
+		dt.beRepaired(dt.getHitPoints());
 	}
-
-	test.attack("DoctorWho");
-	test.beRepaired(20);
-	test.takeDamage(100);
-	test.attack("DoctorWho");
-	test.beRepaired(20);
-
+	std::cout << "Remaining energy points: " << dt.getEnergyPoints() << std::endl;
+	dt.attack(target);
 	return EXIT_SUCCESS;
 }

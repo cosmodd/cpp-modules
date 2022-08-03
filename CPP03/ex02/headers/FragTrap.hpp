@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 14:37:44 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 14:39:18 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/08/03 09:45:08 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 class FragTrap: public ClapTrap
 {
 	private:
-		/* private members */
 
 	public:
+		FragTrap(void);
 		FragTrap(std::string name);
 		FragTrap(const FragTrap&);
 		~FragTrap(void);
@@ -31,7 +31,7 @@ class FragTrap: public ClapTrap
 		// Setters
 
 		// Methods
-		void	highFiveGuys(void) const;
+		void	highFivesGuys(void) const;
 
 };
 

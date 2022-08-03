@@ -1,35 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 12:54:11 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 10:30:41 by mrattez          ###   ########.fr       */
+/*   Created: 2022/07/14 14:37:44 by mrattez           #+#    #+#             */
+/*   Updated: 2022/08/03 09:48:25 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef FRAGTRAP_HPP
+# define FRAGTRAP_HPP
+
 #include "ClapTrap.hpp"
 
-int	main(void)
+class FragTrap: virtual public ClapTrap
 {
-	ClapTrap	test("DALEK");
+	private:
 
-	for (int i = 0; i < 5; i++)
-	{
-		test.attack("DoctorWho");
-		test.beRepaired(4);
-		test.takeDamage(2);
-		std::cout << "----------" << std::endl;
-	}
+	public:
+		FragTrap(void);
+		FragTrap(std::string name);
+		FragTrap(const FragTrap&);
+		~FragTrap(void);
+		FragTrap& operator=(const FragTrap&);
 
-	test.attack("DoctorWho");
-	test.beRepaired(20);
-	test.takeDamage(100);
-	test.attack("DoctorWho");
-	test.beRepaired(20);
+		// Getters
 
-	return EXIT_SUCCESS;
-}
+		// Setters
+
+		// Methods
+		void	highFivesGuys(void) const;
+
+};
+
+#endif
