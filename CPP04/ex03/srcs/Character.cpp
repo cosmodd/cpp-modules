@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 10:26:56 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/23 12:49:53 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/08/31 10:17:30 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,22 @@ Character::Character(const Character& ref)
 {
 	this->_name = ref.getName();
 	for (int i = 0; i < 4; i++)
+		if (this->_inventory[i] != nullptr)
+			delete this->_inventory[i];
+	for (int i = 0; i < 4; i++)
 	{
 		AMateria*	refMateria = ref._inventory[i];
 		if (refMateria == nullptr) continue;
-		this->_inventory[i] = refMateria;
+		this->_inventory[i] = refMateria->clone();
 	}
 	std::cout << "\e[1;37;43m 👤 Character copy constructor called \e[0m" << std::endl;
 }
 
 Character::~Character(void)
 {
+	for (int i = 0; i < 4; i++)
+		if (this->_inventory[i] != nullptr)
+			delete this->_inventory[i];
 	std::cout << "\e[1;37;41m 👤 Character destructor called \e[0m" << std::endl;
 }
 
@@ -49,10 +55,13 @@ Character& Character::operator=(const Character& ref)
 {
 	this->_name = ref.getName();
 	for (int i = 0; i < 4; i++)
+		if (this->_inventory[i] != nullptr)
+			delete this->_inventory[i];
+	for (int i = 0; i < 4; i++)
 	{
 		AMateria*	refMateria = ref._inventory[i];
 		if (refMateria == nullptr) continue;
-		this->_inventory[i] = refMateria;
+		this->_inventory[i] = refMateria->clone();
 	}
 	return *this;
 }

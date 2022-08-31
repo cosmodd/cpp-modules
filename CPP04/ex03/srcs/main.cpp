@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 14:32:42 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/23 11:56:29 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/08/31 10:30:05 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 #include "Character.hpp"
 #include "Ice.hpp"
 #include "Cure.hpp"
+#include "MateriaSource.hpp"
 
 void	checkLeaks(char **av)
 {
-	const std::string	leakCommand = "leaks " + std::string(av[0] + 2);
+	const std::string	leakCommand = "leaks " + std::string(av[0] + 2) + "| grep -R '^Process '";
 	system(leakCommand.c_str());
 }
 
@@ -26,37 +27,36 @@ int	main(int ac, char **av)
 {
 	(void) ac;
 
-	int			nbOfItems = 2;
-	AMateria*	floorItems[nbOfItems];
+	std::cout << "◻️◻️◻️◻️◻️◻️  MATERIA SOURCE ◻️◻️◻️◻️◻️◻️" << std::endl;
+	IMateriaSource* src = new MateriaSource();
 
-	for (int i = 0; i < nbOfItems; i++)
-		floorItems[i] = nullptr;
+	src->learnMateria(new Ice());
+	src->learnMateria(new Cure());
 
-	floorItems[0] = new Ice();
-	floorItems[1] = new Cure();
+	std::cout << "◻️◻️◻️◻️◻️◻️  EQUIPING MATERIAS ◻️◻️◻️◻️◻️◻️" << std::endl;
+	ICharacter* me = new Character("me");
+	AMateria* tmp;
 
-	ICharacter*	mage = new Character("[ 🧙‍♂️ Mage ]");
-	ICharacter*	knight = new Character("[ 🛡 Knight ]");
-	ICharacter*	demon = new Character("[ 👹 Demon ]");
+	tmp = src->createMateria("ice");
 
-	mage->equip(floorItems[0]);
-	mage->equip(floorItems[1]);
+	me->equip(tmp);
 
-	demon->equip(floorItems[0]);
-	demon->equip(floorItems[0]);
-	demon->equip(floorItems[0]);
-	demon->equip(floorItems[0]);
-	demon->equip(floorItems[0]);
+	tmp = src->createMateria("cure");
 
-	mage->use(0, *demon);
-	demon->use(-1, *mage);
+	me->equip(tmp);
 
-	delete mage;
-	delete knight;
-	delete demon;
+	std::cout << "◻️◻️◻️◻️◻️◻️  USING MATERIAS ◻️◻️◻️◻️◻️◻️" << std::endl;
+	ICharacter* bob = new Character("bob");
 
-	for (int i = 0; i < nbOfItems; i++)
-		if (floorItems[i] != nullptr)
-			delete floorItems[i];
+	me->use(0, *bob);
+	me->use(1, *bob);
+
+	std::cout << "◻️◻️◻️◻️◻️◻️  FREEING INSTANCES ◻️◻️◻️◻️◻️◻️" << std::endl;
+	delete bob;
+	delete me;
+	delete src;
+
+	checkLeaks(av);
+
 	return EXIT_SUCCESS;
 }
