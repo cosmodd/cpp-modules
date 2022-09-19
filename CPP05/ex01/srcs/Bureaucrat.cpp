@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:54:25 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/31 13:42:24 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/09/19 09:28:33 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,24 @@ void	Bureaucrat::decrementGrade(void)
 {
 	if (this->_grade + 1 > 150) throw Bureaucrat::GradeTooLowException();
 	this->_grade++;
+}
+
+void	Bureaucrat::signForm(Form& form)
+{
+	if (form.isSigned())
+	{
+		std::cout << this->_name << " cannot sign " << form.getName() << " because it is already signed" << std::endl;
+		return;
+	}
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->_name << " signed '" << form.getName() << "'" << std::endl; 
+	}
+	catch(const std::exception& e)
+	{
+		std::cout << this->_name << " couldn't sign '" << form.getName() << "' because '" << e.what() << "'" << std::endl;
+	}	
 }
 
 // Exceptions
