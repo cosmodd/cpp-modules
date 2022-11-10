@@ -6,25 +6,32 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:36:59 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/05 09:08:01 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/10 14:23:30 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
-Contact::Contact(void)
+Contact::Contact(void):
+	_firstName("Dimitri"),
+	_lastName("Petrenko"),
+	_nickname("Dipet"),
+	_phoneNumber("06 66 66 66 66"),
+	_darkestSecret("I'm a secret")
 {}
 
-Contact::Contact(const Contact& rhs)
+Contact::Contact(const Contact& rhs):
+	_firstName(rhs._firstName),
+	_lastName(rhs._lastName),
+	_nickname(rhs._nickname),
+	_phoneNumber(rhs._phoneNumber),
+	_darkestSecret(rhs._darkestSecret)
 {
-	(void) rhs;
-	/* copy constructor */
 	return;
 }
 
 Contact::~Contact(void)
 {
-	/* destructor code */
 	return;
 }
 

@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 11:46:36 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/05 08:41:41 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/10 14:34:55 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,25 @@
 PhoneBook::PhoneBook(): _index(0), _contactCount(0)
 {}
 
-PhoneBook::PhoneBook(const PhoneBook& rhs)
+PhoneBook::PhoneBook(const PhoneBook& rhs):
+	_index(rhs._index),
+	_contactCount(rhs._contactCount)
 {
-	(void) rhs;
-	/* copy constructor */
-	return;
+	for (int i = 0; i < rhs._contactCount; i++)
+		this->_contacts[i] = rhs._contacts[i];
 }
 
 PhoneBook::~PhoneBook()
 {
-	/* destructor code */
 	return;
 }
 
 PhoneBook& PhoneBook::operator=(const PhoneBook& rhs)
 {
-	(void) rhs;
-	/* copy members */
+	this->_index = rhs._index;
+	this->_contactCount = rhs._contactCount;
+	for (int i = 0; i < rhs._contactCount; i++)
+		this->_contacts[i] = rhs._contacts[i];
 	return *this;
 }
 
