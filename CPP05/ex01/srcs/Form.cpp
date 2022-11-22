@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 15:36:17 by mrattez           #+#    #+#             */
-/*   Updated: 2022/09/19 09:27:36 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/14 12:14:26 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,15 @@ Form& Form::operator=(const Form& ref)
 {
 	this->_signed = ref.isSigned();
 	return *this;
+}
+
+std::ostream&	operator<<(std::ostream& out, const Form& form)
+{
+	out << "\e[1;37m 🧾 Form \e[1;32m'" << form.getName() << "'\e[0m" << std::endl;
+	out << "\e[1;37m ➿ is signed: " << (form.isSigned() ? "✅" : "❌") << "\e[0m" << std::endl;
+	out << "\e[1;37m 📝 Required grade to sign: \e[1;34m" << form.getReqGradeToSign() << "\e[0m" << std::endl;
+	out << "\e[1;37m 🎬 Required grade to execute: \e[1;34m" << form.getReqGradeToExec() << "\e[0m" << std::endl;
+	return out;
 }
 
 // Getters

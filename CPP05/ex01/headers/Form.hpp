@@ -6,13 +6,12 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 13:57:35 by mrattez           #+#    #+#             */
-/*   Updated: 2022/09/19 09:20:26 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/14 10:28:59 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-class Bureaucrat;
 #include "Bureaucrat.hpp"
 #include <iostream>
 
@@ -43,7 +42,7 @@ class Form
 
 		// Methods
 		void	beSigned(const Bureaucrat& bureaucrat);
-		
+
 		// Exceptions
 		class GradeTooHighException: public std::exception
 		{

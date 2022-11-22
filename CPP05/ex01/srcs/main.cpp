@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:40:53 by mrattez           #+#    #+#             */
-/*   Updated: 2022/09/19 09:31:13 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/14 12:15:08 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,29 +64,34 @@ int	main(void)
 	}
 	{
 		std::cout << "◻️◻️◻️◻️ FORMS ◻️◻️◻️◻️" << std::endl;
-		Form	high("High", 1, 1);
-		Form	medium("Medium", 50, 50);
-		Form	low("Low", 150, 150);
+		Form	high("High Form", 1, 1);
+		Form	medium("Medium Form", 50, 50);
+		Form	low("Low Form", 150, 150);
+
+		std::cout << std::endl;
+		std::cout << high << std::endl;
+		std::cout << medium << std::endl;
+		std::cout << low << std::endl;
 
 		Bureaucrat	b_high("Michel", 1);
 		Bureaucrat	b_medium("Dominique", 50);
 		Bureaucrat	b_low("Jean", 150);
-		
+
 		{
-			std::cout << "\e[1;37;45m ---  HIGH  --- \e[0m " << std::endl;
-			b_high.signForm(high);
-			b_high.signForm(medium);
-			b_high.signForm(low);
-			
-			std::cout << "\e[1;37;45m ---  MEDIUM  --- \e[0m " << std::endl;
-			b_medium.signForm(high);
-			b_medium.signForm(medium);
-			b_medium.signForm(low);
-			
 			std::cout << "\e[1;37;45m ---  LOW  --- \e[0m " << std::endl;
 			b_low.signForm(high);
 			b_low.signForm(medium);
 			b_low.signForm(low);
+
+			std::cout << "\e[1;37;45m ---  MEDIUM  --- \e[0m " << std::endl;
+			b_medium.signForm(high);
+			b_medium.signForm(medium);
+			b_medium.signForm(low);
+
+			std::cout << "\e[1;37;45m ---  HIGH  --- \e[0m " << std::endl;
+			b_high.signForm(high);
+			b_high.signForm(medium);
+			b_high.signForm(low);
 		}
 	}
 	return EXIT_SUCCESS;

@@ -6,15 +6,16 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:43:49 by mrattez           #+#    #+#             */
-/*   Updated: 2022/09/19 09:20:17 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/14 10:29:07 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
-class Form;
 #include "Form.hpp"
 #include <iostream>
+
+class Form;
 
 class Bureaucrat
 {
