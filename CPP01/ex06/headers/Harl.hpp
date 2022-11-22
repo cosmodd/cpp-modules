@@ -5,15 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 09:06:00 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/12 11:36:44 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/22 11:43:50 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/22 12:58:46 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HARL_HPP
-# define HARL_HPP
+#pragma once
 
-# include <iostream>
+#include <iostream>
+#include <string>
 
 class Harl
 {
@@ -31,8 +31,12 @@ class Harl
 		~Harl(void);
 		Harl& operator=(const Harl&);
 
-		void	complain(std::string level);
-		void	filter(std::string level);
-};
+		// Getters
 
-#endif // HARL_HPP
+		// Setters
+
+		// Methods
+		void	complain(std::string);
+		void	filter(std::string);
+
+};

@@ -5,23 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 14:29:06 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/05 14:54:45 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 14:54:39 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:12:14 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 #include <iostream>
+#include <string>
 
 int	main(void)
 {
-	Zombie* zombie = newZombie("Dimitri");
-	zombie->announce();
-	delete zombie;
+	// Test of the function: Zombie *newZombie(std::string name);
+	{
+		Zombie	*zombies[10];
 
-	randomChump("Enzoh");
+		for (int i = 0; i < 10; i++)
+			zombies[i] = newZombie("Cloporte" + std::to_string(i));
 
-	// system("leaks brainz");
+		for (int i = 0; i < 10; i++)
+			zombies[i]->announce();
+
+		for (int i = 0; i < 10; i++)
+			delete zombies[i];
+	}
+
+	// Test of the function: void randomChump(std::string name);
+	{
+		for (int i = 0; i < 10; i++)
+			randomChump("Blurp" + std::to_string(i));
+	}
 
 	return (EXIT_SUCCESS);
 }

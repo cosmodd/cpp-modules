@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/07 12:04:27 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 18:22:58 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/22 11:39:43 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,89 +16,102 @@
 
 static void	error(std::string message)
 {
-	std::cout << "\e[1;41;37m ERROR \e[0m\e[1;37m " << message << "\e[0m" << std::endl;
+	std::cout << "\e[1;37;41m ERROR \e[0m\e[1;37m " << message << "\e[0m" << std::endl;
+}
+
+static void	usage(char **av)
+{
+	std::cout << "  \e[1;37;46m Usage \e[0m" << std::endl;
+	std::cout << std::endl;
+	std::cout << "  \e[1;90m" << av[0] << "\e[0m \e[1;32m<filename>\e[0m \e[1;33m<search>\e[0m \e[1;34m<replace>\e[0m" << std::endl;
+	std::cout << std::endl;
+	std::cout << "  \e[3;90m<arg> -> mandatory argument\e[0m" << std::endl;
+	std::cout << "  \e[3;90m[arg] -> optional argument\e[0m" << std::endl;
 }
 
 /**
- * @brief Read the content of the file given in the arguments.
+ * @brief Read the file given and store the content in the given string reference.
  *
- * @param filename	Name of the file to read.
- * @return std::string	content of the file or an empty string if not found.
+ * @param fileName Path to the file
+ * @param content Reference to where to store the file content
+ * @return boolean - true if the file was successfully read
  */
-static std::string	 readFile(std::string filename)
+static bool	readFile(const std::string& fileName, std::string& content)
 {
-	std::ifstream		fileReader(filename);
-	std::stringstream	contentBuffer;
+	std::ifstream		inputStream(fileName);
+	std::stringstream	stringStream;
 
-	if (!fileReader.is_open())
-		return "";
-	contentBuffer << fileReader.rdbuf();
-	return contentBuffer.str();
+	if (!inputStream.is_open())
+	{
+		error("Could not open file '" + fileName + "'");
+		return (false);
+	}
+	stringStream << inputStream.rdbuf();
+	content = stringStream.str();
+	return (true);
 }
 
-static bool	writeFile(std::string filename, std::string content)
+/**
+ * @brief Write the given string to the given file.
+ *
+ * @param fileName Path to the file
+ * @param content String to write to the file
+ * @return boolean - true if the file was successfully written
+ */
+static bool	writeFile(const std::string& fileName, const std::string& content)
 {
-	std::ofstream	fileWriter(filename, std::ofstream::trunc);
+	std::ofstream		outputStream(fileName);
 
-	if (!fileWriter.is_open())
-		return false;
-	fileWriter << content;
-	fileWriter.close();
-	return true;
+	if (!outputStream.is_open())
+	{
+		error("Could not open file '" + fileName + "'");
+		return (false);
+	}
+	outputStream << content;
+	return (true);
 }
 
-static std::string	replaceOccurences(std::string content, std::string search, std::string replace)
+/**
+ * @brief Replace all occurences of the search string by the replace string.
+ *
+ * @param content String to modify
+ * @param search String to search for
+ * @param replace String to replace the search string with
+ */
+static void	replaceAll(std::string& src, const std::string& search, const std::string& replace)
 {
-	std::string	replaced = "";
-	std::size_t	previous = 0;
-	std::size_t	found;
+	std::size_t	find = 0;
 
-	(void) replace;
-	found = content.find(search);
-	if (found == std::string::npos)
-		return content;
-	while (found != std::string::npos)
-	{
-		replaced.append(content.substr(previous, found - previous));
-		replaced.append(replace);
-
-		previous = found + search.length();
-		found = content.find(search, found + search.length());
-	}
-	replaced.append(content.substr(previous, content.length() - previous));
-	return replaced;
+	if (search.empty())
+		return ;
+	while ((find = src.find(search, find)) != std::string::npos)
+		src.replace(find, search.length(), replace);
 }
 
-int	main(int ac, char** av)
+int	main(int ac, char **av)
 {
-	std::string			filename, search, replace, content;
+	std::string	filename;
+	std::string	search;
+	std::string	replace;
+	std::string	content;
 
-	if (ac < 4)
+	if (ac != 4)
 	{
-		error("Not enough arguments !");
-		return (EXIT_SUCCESS);
+		usage(av);
+		return (EXIT_FAILURE);
 	}
-	if (ac > 4)
-	{
-		error("Too many arguments !");
-		return (EXIT_SUCCESS);
-	}
+
 	filename = av[1];
 	search = av[2];
 	replace = av[3];
-	content = readFile(filename);
-	if (content.empty())
-	{
-		error("File '" + filename + "' doesn't exist !");
-		return (EXIT_SUCCESS);
-	}
-	if (search.empty())
-	{
-		error("Search may not be empty !");
-		return (EXIT_SUCCESS);
-	}
-	content = replaceOccurences(content, search, replace);
+
+	if (!readFile(filename, content))
+		return (EXIT_FAILURE);
+
+	replaceAll(content, search, replace);
+
 	if (!writeFile(filename + ".replace", content))
-		error("Error while writing file '" + filename + ".replace' !");
+		return (EXIT_FAILURE);
+
 	return (EXIT_SUCCESS);
 }

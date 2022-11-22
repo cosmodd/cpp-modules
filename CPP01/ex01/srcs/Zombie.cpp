@@ -5,53 +5,47 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 08:28:58 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 08:52:05 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 14:55:13 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:37:43 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie(void): _name("")
-{}
-
-Zombie::Zombie(std::string name): _name(name)
-{}
-
-Zombie::Zombie(const Zombie& rhs)
+Zombie::Zombie(void):
+	_name("Zorg")
 {
-	(void) rhs;
-	return ;
+	std::cout << "\e[1;37;44m 🧟 Zombie default constructor called \e[0m" << std::endl;
+}
+
+Zombie::Zombie(std::string name):
+	_name(name)
+{
+	std::cout << "\e[1;37;44m 🧟 Zombie constructor called \e[0m" << std::endl;
+}
+
+Zombie::Zombie(const Zombie& ref):
+	_name(ref._name)
+{
+	std::cout << "\e[1;37;43m 🧟 Zombie copy constructor called \e[0m" << std::endl;
 }
 
 Zombie::~Zombie(void)
 {
-	std::cout << this->_name << " was killed !" << std::endl;
-	return ;
+	std::cout << "\e[1;37;41m 🧟 Zombie destructor called \e[0m" << std::endl;
 }
 
 Zombie& Zombie::operator=(const Zombie& ref)
 {
-	this->_name = ref.getName();
+	this->_name = ref._name;
 	return *this;
 }
 
 // Getters
 
-std::string Zombie::getName(void) const
-{
-	return this->_name;
-}
-
 // Setters
 
-void	Zombie::setName(std::string newName)
-{
-	this->_name = newName;
-}
-
 // Methods
-
 void	Zombie::announce(void) const
 {
 	std::cout << this->_name << ": BraiiiiiiinnnzzzZ..." << std::endl;

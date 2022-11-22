@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 10:38:48 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 11:52:20 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 15:35:51 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:45:31 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-# define HUMANB_HPP
+#pragma once
 
-# include <iostream>
-# include <iomanip>
-# include "Weapon.hpp"
+#include "Weapon.hpp"
+
+#include <iostream>
+#include <string>
 
 class HumanB
 {
@@ -24,7 +24,7 @@ class HumanB
 		Weapon*		_weapon;
 
 	public:
-		HumanB(std::string);
+		HumanB(std::string name);
 		HumanB(const HumanB&);
 		~HumanB(void);
 		HumanB& operator=(const HumanB&);
@@ -35,8 +35,5 @@ class HumanB
 		void	setWeapon(Weapon& weapon);
 
 		// Methods
-		void	attack(void) const;
-
+		void	attack() const;
 };
-
-#endif

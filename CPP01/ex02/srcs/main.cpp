@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/05 14:29:06 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 09:10:23 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/21 15:26:30 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,19 @@
 
 int	main(void)
 {
-	std::string		brain = "HI THIS IS BRAIN";
-	std::string*	brainptr = &brain;
-	std::string&	brainref = brain;
+	std::string	str = "HI THIS IS BRAIN";
+	std::string	*str_ptr = &str;
+	std::string	&str_ref = str;
 
-	std::cout << "Addresses:" << std::endl;
-	std::cout << " - string: " << &brain << std::endl;
-	std::cout << " - strPTR: " << brainptr << std::endl;
-	std::cout << " - strREF: " << &brainref << std::endl;
+	std::cout << &str << std::endl;
+	std::cout << str_ptr << std::endl;
+	std::cout << &str_ref << std::endl;
+
 	std::cout << std::endl;
-	std::cout << "Values:" << std::endl;
-	std::cout << " - string: \"" << brain << "\"" << std::endl;
-	std::cout << " - strPTR: \"" << *brainptr << "\"" << std::endl;
-	std::cout << " - strREF: \"" << brainref << "\"" << std::endl;
+
+	std::cout << str << std::endl;
+	std::cout << *str_ptr << std::endl;
+	std::cout << str_ref << std::endl;
+
 	return (EXIT_SUCCESS);
 }

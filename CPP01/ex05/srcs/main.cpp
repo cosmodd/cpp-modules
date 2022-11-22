@@ -5,23 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 12:04:27 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/12 10:26:55 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/22 12:30:49 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/22 12:31:51 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
 #include "Harl.hpp"
+
+#include <iostream>
 
 int	main(void)
 {
-	Harl		harl;
-	std::string	input;
-
-	while (!std::cin.eof() && input != "exit")
 	{
-		std::getline(std::cin, input);
-		harl.complain(input);
+		Harl	harl;
+
+		harl.complain("DEBUG");
+		harl.complain("INFO");
+		harl.complain("WARNING");
+		harl.complain("ERROR");
 	}
 	return (EXIT_SUCCESS);
 }

@@ -5,15 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 14:37:08 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/05 14:39:10 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 15:14:17 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:14:23 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie* newZombie(std::string name)
+Zombie*	newZombie(std::string name)
 {
-	Zombie* zombie = new Zombie(name);
-	return (zombie);
+	return new Zombie(name);
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 14:36:58 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/05 14:46:18 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 15:14:33 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:14:46 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	randomChump(std::string name)
 {
-	Zombie zombie(name);
+	Zombie	zombie(name);
+
 	zombie.announce();
 }

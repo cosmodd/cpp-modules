@@ -5,17 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 14:30:07 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 08:38:36 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 14:51:03 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:37:54 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#pragma once
 
-# include <iostream>
-# include <iomanip>
-# include <string>
+#include <iostream>
+#include <string>
 
 class Zombie
 {
@@ -24,15 +22,19 @@ class Zombie
 
 	public:
 		Zombie(void);
-		Zombie(std::string name);
+		Zombie(std::string);
 		Zombie(const Zombie&);
 		~Zombie(void);
 		Zombie& operator=(const Zombie&);
 
+		// Getters
+
+		// Setters
+
+		// Methods
 		void	announce(void) const;
+
 };
 
-Zombie* newZombie(std::string name);
+Zombie*	newZombie(std::string name);
 void	randomChump(std::string name);
-
-#endif

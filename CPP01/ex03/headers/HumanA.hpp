@@ -5,17 +5,17 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 10:13:27 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 12:01:47 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 15:33:20 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/21 15:40:19 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANA_HPP
-# define HUMANA_HPP
+#pragma once
 
-# include <iostream>
-# include <iomanip>
-# include "Weapon.hpp"
+#include "Weapon.hpp"
+
+#include <iostream>
+#include <string>
 
 class HumanA
 {
@@ -32,10 +32,7 @@ class HumanA
 		// Getters
 
 		// Setters
-		void	setWeapon(Weapon& weapon);
 
 		// Methods
 		void	attack(void) const;
 };
-
-#endif

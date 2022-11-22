@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 10:17:07 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/07 12:02:17 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/21 15:38:56 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/22 10:24:26 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,21 @@
 HumanA::HumanA(std::string name, Weapon& weapon):
 	_name(name),
 	_weapon(weapon)
-{}
+{
+	std::cout << "\e[1;37;44m 👤 HumanA constructor called \e[0m" << std::endl;
+}
 
 HumanA::HumanA(const HumanA& ref):
 	_name(ref._name),
 	_weapon(ref._weapon)
-{}
+{
+	std::cout << "\e[1;37;43m 👤 HumanA copy constructor called \e[0m" << std::endl;
+}
 
 HumanA::~HumanA(void)
-{}
+{
+	std::cout << "\e[1;37;41m 👤 HumanA destructor called \e[0m" << std::endl;
+}
 
 HumanA& HumanA::operator=(const HumanA& ref)
 {
@@ -35,10 +41,6 @@ HumanA& HumanA::operator=(const HumanA& ref)
 // Getters
 
 // Setters
-void	HumanA::setWeapon(Weapon& weapon)
-{
-	this->_weapon = weapon;
-}
 
 // Methods
 void	HumanA::attack(void) const
