@@ -5,23 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 09:51:32 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 12:09:26 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 14:03:28 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 14:34:19 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Fixed.hpp"
 #include "Point.hpp"
 
-Fixed	idkhowtonameit(const Point a, const Point b, const Point p)
+static Fixed	crossProduct(const Point v1, const Point v2)
 {
-	return (p.getX() - a.getX()) * (b.getY() - a.getY()) - (p.getY() - a.getY()) * (b.getX() - a.getX());
+	return v1.getX() * v2.getY() - v1.getY() * v2.getX();
 }
 
-bool	bsp(const Point a, const Point b, const Point c, const Point p)
+bool	bsp(const Point a, const Point b, const Point c, const Point point)
 {
-	Fixed	ab = idkhowtonameit(a, b, p);
-	Fixed	bc = idkhowtonameit(b, c, p);
-	Fixed	ca = idkhowtonameit(c, a, p);
-	Fixed	zero = Fixed(0);
-	return (ab > zero && bc > zero && ca > zero);
+	const Point	ab = b - a;
+	const Point	ap = point - a;
+	
+	const Point	bc = c - b;
+	const Point	bp = point - b;
+	
+	const Point	ca = a - c;
+	const Point	cp = point - c;
+
+	const Fixed	zero;
+
+	return crossProduct(ab, ap) > zero
+		&& crossProduct(bc, bp) > zero
+		&& crossProduct(ca, cp) > zero;
 }

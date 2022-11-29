@@ -5,21 +5,20 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:43:21 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/12 13:39:25 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 10:00:56 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 10:04:02 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#pragma once
 
 #include <iostream>
 
 class Fixed
 {
 	private:
-		const static int	_fractionalBits;
-		int					_fixedPointValue;
+		static const int	_fractionalBits = 8;
+		int					_bits;
 
 	public:
 		Fixed(void);
@@ -31,10 +30,8 @@ class Fixed
 		int	getRawBits(void) const;
 
 		// Setters
-		void	setRawBits(int const raw);
+		void	setRawBits(const int raw);
 
 		// Methods
 
 };
-
-#endif // FIXED_HPP

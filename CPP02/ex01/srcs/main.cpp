@@ -5,37 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:42:55 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/13 13:32:33 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 10:06:45 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 11:04:18 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Fixed.hpp"
 #include <iostream>
 #include <iomanip>
-#include "Fixed.hpp"
+#include <bitset>
 
-int main( void ) {
-	int		fpNumber = 4;
-	Fixed	fixedPoints[fpNumber];
+template<typename T>
+static void	printBits(T bits)
+{
+	std::cout << std::setw(10) << bits << " = " << std::bitset<sizeof(T) * 8>(bits) << std::endl;
+}
 
-	fixedPoints[0] = 5;
-	fixedPoints[1] = Fixed(1.2f);
-	fixedPoints[2] = 1.7f;
-	fixedPoints[3] = 1.5f;
+int	main(void)
+{
+	{
+		Fixed a;
+		Fixed const b( 10 );
+		Fixed const c( 42.42f );
+		Fixed const d( b );
 
-	std::cout << "====  FIXED  ====" << std::endl;
-	for (int i = 0; i < fpNumber; i++)
-	{
-		std::cout << "fixedPoints[" << i << "] => " << fixedPoints[i] << std::endl;
+		a = Fixed( 1234.4321f );
+		
+		std::cout << "a is " << a << std::endl;
+		std::cout << "b is " << b << std::endl;
+		std::cout << "c is " << c << std::endl;
+		std::cout << "d is " << d << std::endl;
+		std::cout << std::endl;
+		std::cout << "a is " << a.toInt() << " as integer" << std::endl;
+		std::cout << "b is " << b.toInt() << " as integer" << std::endl;
+		std::cout << "c is " << c.toInt() << " as integer" << std::endl;
+		std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 	}
-	std::cout << "====  FLOAT  ====" << std::endl;
-	for (int i = 0; i < fpNumber; i++)
-	{
-		std::cout << "fixedPoints[" << i << "] => " << fixedPoints[i].toFloat() << std::endl;
-	}
-	std::cout << "==== INTEGER ====" << std::endl;
-	for (int i = 0; i < fpNumber; i++)
-	{
-		std::cout << "fixedPoints[" << i << "] => " << fixedPoints[i].toInt() << std::endl;
-	}
+	return (EXIT_SUCCESS);
 }

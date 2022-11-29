@@ -5,41 +5,37 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:42:55 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 12:09:35 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 10:06:45 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 14:45:24 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <iomanip>
 #include "Fixed.hpp"
 #include "Point.hpp"
+#include <iostream>
 
-int main( void )
+int	main(void)
 {
-	// Other
-	const std::string	yes = "\e[1;37;42m ✓ \e[0m";
-	const std::string	no = "\e[1;37;41m 𐄂 \e[0m";
+	const Point	a(0.0f, 0.0f);
+	const Point	b(10.0f, 0.0f);
+	const Point	c(5.0f, 10.0f);
 
-	// Triangle
-	const Point	a(0, 4);
-	const Point	b(4, 0);
-	const Point	c(-4, -5);
+	const float	scale = 4.0f;
 
-	// Points to check
-	const Point	d(0, 0);
-	const Point	e(1.9f, 1.9f);
-	const Point f(2, 2);
-	const Point g(3, 3);
+	for (int y = 11 * scale; y >= -1; y--)
+	{
+		for (int x = -1; x < 11 * scale; x++)
+		{
+			float	fx = x / scale;
+			float	fy = y / scale;
+			
+			const Point	pt = Point(fx, fy);
+			bool		isInside = bsp(a, b, c, pt);
+			
+			std::cout << (isInside ? "\e[47m  \e[0m" : "\e[40m  \e[0m");
+		}
+		std::cout << std::endl;
+	}
 
-	std::cout << "\e[1;37;104m  TRIANGLE POINTS  \e[0m" << std::endl;
-	std::cout << "    A" << a << std::endl;
-	std::cout << "    B" << b << std::endl;
-	std::cout << "    C" << c << std::endl;
-	std::cout << "\e[1;37;104m  CHECKS           \e[0m" << std::endl;
-	std::cout << (bsp(a, b, c, d) ? yes : no) << " D" << d << std::endl;
-	std::cout << (bsp(a, b, c, e) ? yes : no) << " E" << e << std::endl;
-	std::cout << (bsp(a, b, c, f) ? yes : no) << " F" << f << std::endl;
-	std::cout << (bsp(a, b, c, g) ? yes : no) << " G" << g << std::endl;
-	return EXIT_SUCCESS;
+	return (EXIT_SUCCESS);
 }

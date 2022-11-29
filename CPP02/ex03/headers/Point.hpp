@@ -5,23 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 09:44:51 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 12:07:26 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 13:52:51 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 14:22:36 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef POINT_HPP
-# define POINT_HPP
+#pragma once
+
+#include "Fixed.hpp"
 
 #include <iostream>
-#include <iomanip>
-#include "Fixed.hpp"
 
 class Point
 {
 	private:
-		Fixed	_x;
-		Fixed	_y;
+		const Fixed	_x;
+		const Fixed _y;
 
 	public:
 		Point(void);
@@ -30,13 +29,14 @@ class Point
 		~Point(void);
 		Point& operator=(const Point&);
 
+		Point	operator-(const Point&) const;
+		Point	operator+(const Point&) const;
+
 		// Getters
-		Fixed	getX(void) const;
-		Fixed	getY(void) const;
+		const Fixed	getX(void) const;
+		const Fixed	getY(void) const;
 
 		// Setters
-		void	setX(const Fixed);
-		void	setY(const Fixed);
 
 		// Methods
 
@@ -44,7 +44,4 @@ class Point
 
 std::ostream&	operator<<(std::ostream&, const Point&);
 
-Fixed	idkhowtonameit(const Point, const Point, const Point);
 bool	bsp(const Point, const Point, const Point, const Point);
-
-#endif

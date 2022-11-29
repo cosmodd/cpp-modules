@@ -5,26 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 09:47:40 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 10:24:58 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 13:55:53 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 14:26:23 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
 Point::Point(void):
-	_x(0),
-	_y(0)
+	_x(0), _y(0)
 {}
 
-Point::Point(const float x, const float y):
-	_x(x),
-	_y(y)
+Point::Point(float x, float y):
+	_x(x), _y(y)
 {}
 
 Point::Point(const Point& ref):
-	_x(ref._x),
-	_y(ref._y)
+	_x(ref._x), _y(ref._y)
 {}
 
 Point::~Point(void)
@@ -32,39 +29,46 @@ Point::~Point(void)
 
 Point& Point::operator=(const Point& ref)
 {
-	this->_x = ref._x;
-	this->_y = ref._y;
+	(Fixed&)(this->_x) = ref._x;
+	(Fixed&)(this->_y) = ref._y;
 	return *this;
 }
 
-std::ostream&	operator<<(std::ostream& os, const Point& point)
+Point	Point::operator+(const Point& ref) const
 {
-	os << "(" << point.getX() << ", " << point.getY() << ")";
+	Point	result;
+
+	(Fixed&)(result._x) = this->_x + ref._x;
+	(Fixed&)(result._y) = this->_y + ref._y;
+	return result;
+}
+
+Point	Point::operator-(const Point& ref) const
+{
+	Point	result;
+
+	(Fixed&)(result._x) = this->_x - ref._x;
+	(Fixed&)(result._y) = this->_y - ref._y;
+	return result;
+}
+
+std::ostream&	operator<<(std::ostream& os, const Point& ref)
+{
+	os << "(" << ref.getX() << ", " << ref.getY() << ")";
 	return os;
 }
 
 // Getters
-
-Fixed	Point::getX(void) const
+const Fixed	Point::getX(void) const
 {
 	return this->_x;
 }
 
-Fixed	Point::getY(void) const
+const Fixed	Point::getY(void) const
 {
 	return this->_y;
 }
 
 // Setters
-
-void	Point::setX(const Fixed value)
-{
-	this->_x = value;
-}
-
-void	Point::setY(const Fixed value)
-{
-	this->_y = value;
-}
 
 // Methods

@@ -5,22 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/12 12:43:21 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/13 13:31:08 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/24 10:00:56 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/24 11:02:51 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-# define FIXED_HPP
+#pragma once
 
 #include <iostream>
 #include <cmath>
 
+/**
+ * @brief Fixed point number where bits are stored in Q(23.8) pattern
+ */
 class Fixed
 {
 	private:
-		const static int	_fractionalBits;
-		int					_fixedPointValue;
+		static const int	_fractionalBits = 8;
+		int					_bits;
 
 	public:
 		Fixed(void);
@@ -28,20 +30,18 @@ class Fixed
 		Fixed(const float);
 		Fixed(const Fixed&);
 		~Fixed(void);
-		Fixed&	operator=(const Fixed&);
+		Fixed& operator=(const Fixed&);
 
 		// Getters
 		int	getRawBits(void) const;
 
 		// Setters
-		void	setRawBits(int const raw);
+		void	setRawBits(const int raw);
 
 		// Methods
-		float	toFloat(void) const;
 		int		toInt(void) const;
+		float	toFloat(void) const;
 
 };
 
-std::ostream&	operator<<(std::ostream& os, const Fixed& fixed);
-
-#endif // FIXED_HPP
+std::ostream& operator<<(std::ostream& os, const Fixed& ref);
