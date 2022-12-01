@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 12:54:11 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/03 12:10:09 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/30 17:27:13 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,42 @@
 int	main(void)
 {
 	const std::string	target = "DoctorWho";
-	DiamondTrap	dt("DALEK");
-
-	dt.whoAmI();
-	std::cout << "HitPoints: " << dt.getHitPoints() << std::endl;
-	std::cout << "EnergyPoints: " << dt.getEnergyPoints() << std::endl;
-	std::cout << "AttackDamage: " << dt.getAttackDamage() << std::endl;
-
-	dt.guardGate();
-	dt.highFivesGuys();
-	std::cout << "HitPoints: " << dt.getHitPoints() << std::endl;
-	dt.takeDamage(dt.getAttackDamage());
-	std::cout << "HitPoints: " << dt.getHitPoints() << std::endl;
-	for (int i = 0; i < 50; i++)
+	DiamondTrap			diamondTrap("DALEK");
+	
 	{
-		dt.beRepaired(dt.getHitPoints());
+		std::cout << std::endl << "\e[1;30;47m 💎 Default informations \e[0m" << std::endl << std::endl;
+		std::cout << diamondTrap << std::endl;
 	}
-	std::cout << "Remaining energy points: " << dt.getEnergyPoints() << std::endl;
-	dt.attack(target);
+	{
+		std::cout << std::endl << "\e[1;30;47m ⚡️ Draining energy \e[0m" << std::endl << std::endl;
+
+		while (diamondTrap.getEnergyPoints() > 0)
+			diamondTrap.attack(target);
+	}
+	{
+		std::cout << std::endl << "\e[1;30;47m 💎 Informations \e[0m" << std::endl << std::endl;
+		std::cout << diamondTrap << std::endl;
+	}
+	{
+		std::cout << std::endl << "\e[1;30;47m ⚡️ No energy \e[0m" << std::endl << std::endl;
+		diamondTrap.attack(target);
+		diamondTrap.beRepaired(0);
+	}
+	{
+		std::cout << std::endl << "\e[1;30;47m 💀 Dead \e[0m" << std::endl << std::endl;
+		std::cout << diamondTrap << std::endl;
+		diamondTrap.takeDamage(diamondTrap.getHitPoints());
+		std::cout << diamondTrap << std::endl;
+		diamondTrap.takeDamage(0);
+		diamondTrap.beRepaired(0);
+		diamondTrap.attack(target);
+	}
+	{
+		std::cout << std::endl << "\e[1;30;47m 💎 Exclusive methods \e[0m" << std::endl << std::endl;
+		diamondTrap.whoAmI();
+		diamondTrap.highFivesGuys();
+		diamondTrap.guardGate();
+	}
+	
 	return EXIT_SUCCESS;
 }

@@ -5,46 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:39:45 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/03 09:46:15 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 10:51:32 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 10:56:39 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(void)
+FragTrap::FragTrap(void):
+	ClapTrap("FragTrap")
 {
-	this->setName("FragTrap");
-	this->setHitPoints(100);
-	this->setEnergyPoints(100);
-	this->setAttackDamage(30);
-	std::cout << "\e[1;37;44m 🤖 FragTrap default construction ! \e[0m" << std::endl;
+	this->_hitPoints = 100;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
+	std::cout << "\e[1;37;44m 🤖 FragTrap default constructor called \e[0m" << std::endl;
 }
 
-FragTrap::FragTrap(std::string name):
+FragTrap::FragTrap(std::string const &name):
 	ClapTrap(name)
 {
-	this->setHitPoints(100);
-	this->setEnergyPoints(100);
-	this->setAttackDamage(30);
-	std::cout << "\e[1;37;44m 🤖 FragTrap " << this->getName() << " has been constructed ! \e[0m" << std::endl;
+	this->_hitPoints = 100;
+	this->_energyPoints = 100;
+	this->_attackDamage = 30;
+	std::cout << "\e[1;37;44m 🤖 FragTrap constructor called \e[0m" << std::endl;
 }
 
-FragTrap::FragTrap(const FragTrap& ref):
+FragTrap::FragTrap(FragTrap const &ref):
 	ClapTrap(ref)
-{}
+{
+	std::cout << "\e[1;37;44m 🤖 FragTrap copy constructor called \e[0m" << std::endl;
+}
 
 FragTrap::~FragTrap(void)
 {
-	std::cout << "\e[1;37;41m 🤖 FragTrap " << this->getName() << " has been destructed ! \e[0m" << std::endl;
+	std::cout << "\e[1;37;41m 🤖 FragTrap destructor called \e[0m" << std::endl;
 }
 
-FragTrap& FragTrap::operator=(const FragTrap& ref)
+FragTrap& FragTrap::operator=(FragTrap const &ref)
 {
-	this->setName(ref.getName());
-	this->setHitPoints(ref.getHitPoints());
-	this->setEnergyPoints(ref.getEnergyPoints());
-	this->setAttackDamage(ref.getAttackDamage());
+	this->_name = ref._name;
+	this->_hitPoints = ref._hitPoints;
+	this->_energyPoints = ref._energyPoints;
+	this->_attackDamage = ref._attackDamage;
+	std::cout << "\e[1;37;44m 🤖 FragTrap copy assignment operator called \e[0m" << std::endl;
 	return *this;
 }
 
@@ -53,12 +56,23 @@ FragTrap& FragTrap::operator=(const FragTrap& ref)
 // Setters
 
 // Methods
+void	FragTrap::attack(std::string const &target)
+{
+	if (this->_hitPoints < 1)
+	{
+		std::cout << "\e[1;37;41m 🤖 FragTrap " << this->_name << " is dead, it can't attack \e[0m" << std::endl;
+		return ;
+	}
+	if (this->_energyPoints < 1)
+	{
+		std::cout << "\e[1;37;41m 🤖 FragTrap " << this->_name << " is out of energy, it can't attack \e[0m" << std::endl;
+		return ;
+	}
+	this->_energyPoints -= 1;
+	std::cout << "\e[1;37;44m 🤖 FragTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage! \e[0m" << std::endl;
+}
+
 void	FragTrap::highFivesGuys(void) const
 {
-	if (this->getHitPoints() < 1)
-	{
-		std::cout << "\e[1;37;46m FragTrap \e[0m " << this->getName() << " is dead 💀 so can't high five ✋" << std::endl;
-		return;
-	}
-	std::cout << "\e[1;37;46m FragTrap \e[0m " << this->getName() << " asks for an high five ✋" << std::endl;
+	std::cout << "\e[1;37;44m 🤖 FragTrap " << this->_name << " gives high fives to everyone! \e[0m" << std::endl;
 }

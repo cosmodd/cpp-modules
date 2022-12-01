@@ -5,34 +5,33 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:37:44 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/03 09:45:08 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 10:49:27 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 10:52:49 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRAGTRAP_HPP
-# define FRAGTRAP_HPP
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <cmath>
 
 #include "ClapTrap.hpp"
 
 class FragTrap: public ClapTrap
 {
-	private:
-
 	public:
 		FragTrap(void);
-		FragTrap(std::string name);
-		FragTrap(const FragTrap&);
+		FragTrap(std::string const&);
+		FragTrap(FragTrap const&);
 		~FragTrap(void);
-		FragTrap& operator=(const FragTrap&);
+		FragTrap& operator=(FragTrap const&);
 
 		// Getters
 
 		// Setters
 
 		// Methods
+		void	attack(std::string const &target);
 		void	highFivesGuys(void) const;
-
 };
-
-#endif

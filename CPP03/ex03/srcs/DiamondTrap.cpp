@@ -5,46 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 10:56:56 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/03 12:17:38 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 13:42:26 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 14:21:42 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(void)
+DiamondTrap::DiamondTrap(void):
+	ClapTrap("DiamondTrap_clap_name"),
+	_name("DiamondTrap")
 {
-	ClapTrap::setName("ClapTrap_clap_name");
-	this->_name = "DiamondTrap";
+	this->_hitPoints = FragTrap::_hitPoints;
+	this->_energyPoints = ScavTrap::_energyPoints;
+	this->_attackDamage = FragTrap::_attackDamage;
+	std::cout << "\e[1;37;44m 💎 DiamondTrap default constructor called \e[0m" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string name)
+DiamondTrap::DiamondTrap(std::string const &name):
+	ClapTrap(name + "_clap_name"),
+	_name(name)
 {
-	ClapTrap::setName(name + "_clap_name");
-	this->setName(name);
-	std::cout << "\e[1;37;44m 🤖 DiamondTrap " << this->_name << " has been constructed ! \e[0m" << std::endl;
+	this->_hitPoints = FragTrap::_hitPoints;
+	this->_energyPoints = ScavTrap::_energyPoints;
+	this->_attackDamage = FragTrap::_attackDamage;
+	std::cout << "\e[1;37;44m 💎 DiamondTrap constructor called \e[0m" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& ref)
+DiamondTrap::DiamondTrap(DiamondTrap const &ref):
+	ClapTrap(ref._name + "_clap_name"),
+	_name(ref._name)
 {
-	this->setName(ref.getName());
-	this->setHitPoints(ref.FragTrap::getHitPoints());
-	this->setEnergyPoints(ref.ScavTrap::getEnergyPoints());
-	this->setAttackDamage(ref.FragTrap::getAttackDamage());
+	std::cout << "\e[1;37;44m 💎 DiamondTrap copy constructor called \e[0m" << std::endl;
 }
 
 DiamondTrap::~DiamondTrap(void)
 {
-	std::cout << "\e[1;37;41m 🤖 DiamondTrap " << this->_name << " has been destructed ! \e[0m" << std::endl;
+	std::cout << "\e[1;37;41m 💎 DiamondTrap destructor called \e[0m" << std::endl;
 }
 
-DiamondTrap& DiamondTrap::operator=(const DiamondTrap& ref)
+DiamondTrap& DiamondTrap::operator=(DiamondTrap const &ref)
 {
-	this->setName(ref.getName());
-	this->setHitPoints(ref.FragTrap::getHitPoints());
-	this->setEnergyPoints(ref.ScavTrap::getEnergyPoints());
-	this->setAttackDamage(ref.FragTrap::getAttackDamage());
+	this->_name = ref._name;
+	this->_hitPoints = ref._hitPoints;
+	this->_energyPoints = ref._energyPoints;
+	this->_attackDamage = ref._attackDamage;
+	std::cout << "\e[1;37;44m 💎 DiamondTrap copy assignment operator called \e[0m" << std::endl;
 	return *this;
+}
+
+std::ostream & operator<<(std::ostream &os, DiamondTrap const &ref)
+{
+	os << "\e[1;37;44m 💎 DiamondTrap " << ref.getName() << " \e[0m";
+	os << "\e[1;37;41m 💖 " << ref.getHitPoints() << " \e[0m";
+	os << "\e[1;37;42m 💧 " << ref.getEnergyPoints() << " \e[0m";
+	os << "\e[1;37;43m 💥 " << ref.getAttackDamage() << " \e[0m";
+	return os;
 }
 
 // Getters
@@ -55,33 +71,29 @@ std::string	DiamondTrap::getName(void) const
 
 unsigned int	DiamondTrap::getHitPoints(void) const
 {
-	return FragTrap::getHitPoints();
+	return this->_hitPoints;
 }
 
 unsigned int	DiamondTrap::getEnergyPoints(void) const
 {
-	return ScavTrap::getEnergyPoints();
+	return this->_energyPoints;
 }
 
 unsigned int	DiamondTrap::getAttackDamage(void) const
 {
-	return FragTrap::getAttackDamage();
+	return this->_attackDamage;
 }
 
 // Setters
-void	DiamondTrap::setName(std::string name)
-{
-	this->_name = name;
-}
 
 // Methods
+void	DiamondTrap::attack(std::string const &target)
+{
+	ScavTrap::attack(target);
+}
 
 void	DiamondTrap::whoAmI(void) const
 {
-	std::cout << "\e[1;37;43m DiamondTrap \e[0m My name is \e[1;3;4m" << this->getName() << "\e[0m and my ClapTrap name is \e[1;3;4m" << ClapTrap::getName() << "\e[0m 🤖" << std::endl;
-}
-
-void	DiamondTrap::attack(const std::string &target)
-{
-	ScavTrap::attack(target);
+	std::cout << "\e[1;37;44m 💎 DiamondTrap name: " << this->_name << " \e[0m" << std::endl;
+	std::cout << "\e[1;37;44m 💎 ClapTrap name: " << this->ClapTrap::_name << " \e[0m" << std::endl;
 }

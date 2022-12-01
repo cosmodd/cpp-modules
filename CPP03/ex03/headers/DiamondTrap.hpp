@@ -5,18 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:53:41 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/03 11:40:15 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 13:21:28 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 14:18:51 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DIAMONDTRAP_HPP
-# define DIAMONDTRAP_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
-#include "ScavTrap.hpp"
+#include <cmath>
+
 #include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 class DiamondTrap: public FragTrap, public ScavTrap
 {
@@ -25,10 +26,10 @@ class DiamondTrap: public FragTrap, public ScavTrap
 
 	public:
 		DiamondTrap(void);
-		DiamondTrap(std::string);
-		DiamondTrap(const DiamondTrap&);
+		DiamondTrap(std::string const&);
+		DiamondTrap(DiamondTrap const&);
 		~DiamondTrap(void);
-		DiamondTrap& operator=(const DiamondTrap&);
+		DiamondTrap& operator=(DiamondTrap const&);
 
 		// Getters
 		std::string		getName(void) const;
@@ -37,11 +38,10 @@ class DiamondTrap: public FragTrap, public ScavTrap
 		unsigned int	getAttackDamage(void) const;
 
 		// Setters
-		void	setName(std::string);
 
 		// Methods
+		void	attack(std::string const &target);
 		void	whoAmI(void) const;
-		void	attack(const std::string &target);
 };
 
-#endif
+std::ostream & operator<<(std::ostream &os, DiamondTrap const &ref);

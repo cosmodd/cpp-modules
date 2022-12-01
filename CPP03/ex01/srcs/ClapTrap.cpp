@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 12:58:39 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 13:48:07 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 09:39:19 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 10:32:32 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,134 +18,87 @@ ClapTrap::ClapTrap(void):
 	_energyPoints(10),
 	_attackDamage(0)
 {
-	std::cout << "\e[1;37;44m 🤖 ClapTrap default construction ! \e[0m" << std::endl;
+	std::cout << "\e[1;37;44m 🤖 ClapTrap default constructor called \e[0m" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name):
+ClapTrap::ClapTrap(std::string const& name):
 	_name(name),
 	_hitPoints(10),
 	_energyPoints(10),
 	_attackDamage(0)
 {
-	std::cout << "\e[1;37;44m 🤖 ClapTrap " << this->_name << " has been constructed ! \e[0m" << std::endl;
+	std::cout << "\e[1;37;44m 🤖 ClapTrap named constructor called \e[0m" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& ref):
+ClapTrap::ClapTrap(ClapTrap const &ref):
 	_name(ref._name),
 	_hitPoints(ref._hitPoints),
 	_energyPoints(ref._energyPoints),
 	_attackDamage(ref._attackDamage)
-{}
+{
+	std::cout << "\e[1;37;44m 🤖 ClapTrap copy constructor called \e[0m" << std::endl;
+}
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "\e[1;37;41m 🤖 ClapTrap " << this->_name << " has been destructed ! \e[0m" << std::endl;
+	std::cout << "\e[1;37;41m 🤖 ClapTrap destructor called \e[0m" << std::endl;
 }
 
-ClapTrap& ClapTrap::operator=(const ClapTrap& ref)
+ClapTrap& ClapTrap::operator=(ClapTrap const &ref)
 {
 	this->_name = ref._name;
 	this->_hitPoints = ref._hitPoints;
 	this->_energyPoints = ref._energyPoints;
 	this->_attackDamage = ref._attackDamage;
+	std::cout << "\e[1;37;44m 🤖 ClapTrap copy assignement operator called \e[0m" << std::endl;
 	return *this;
 }
 
 // Getters
-std::string	ClapTrap::getName(void) const
-{
-	return this->_name;
-}
-
-unsigned int	ClapTrap::getHitPoints(void) const
-{
-	return this->_hitPoints;
-}
-
-unsigned int	ClapTrap::getEnergyPoints(void) const
-{
-	return this->_energyPoints;
-}
-
-unsigned int	ClapTrap::getAttackDamage(void) const
-{
-	return this->_attackDamage;
-}
 
 // Setters
 
-void	ClapTrap::setName(std::string name)
-{
-	this->_name = name;
-}
-
-void	ClapTrap::setHitPoints(unsigned int hitPoints)
-{
-	this->_hitPoints = hitPoints;
-}
-
-void	ClapTrap::setEnergyPoints(unsigned int energyPoints)
-{
-	this->_energyPoints = energyPoints;
-}
-
-void	ClapTrap::setAttackDamage(unsigned int attackDamage)
-{
-	this->_attackDamage = attackDamage;
-}
-
 // Methods
-
-void	ClapTrap::attack(const std::string& target)
+void	ClapTrap::attack(std::string const &target)
 {
 	if (this->_hitPoints < 1)
 	{
-		std::cout << "\e[1;37;44m ClapTrap \e[0m " << this->_name << " is dead 💀 and can't attack ⚔️" << std::endl;
+		std::cout << "\e[1;37;41m 🤖 ClapTrap " << this->_name << " is dead, it can't attack \e[0m" << std::endl;
 		return;
 	}
 	if (this->_energyPoints < 1)
 	{
-		std::cout << "\e[1;37;44m ClapTrap \e[0m " << this->_name << " has no more energy points ⚡️ to attack ⚔️" << std::endl;
+		std::cout << "\e[1;37;41m 🤖 ClapTrap " << this->_name << " is out of energy, it can't attack \e[0m" << std::endl;
 		return;
 	}
-	this->_energyPoints--;
-	std::cout	<< "\e[1;37;44m ClapTrap \e[0m " << this->_name
-				<< " attacks " << target
-				<< ", causing " << this->_attackDamage
-				<< " points of damage ⚔️" << std::endl;
+	this->_energyPoints -= 1;
+	std::cout << "\e[1;37;42m 🤖 ClapTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage! \e[0m" << std::endl;
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
 	if (this->_hitPoints < 1)
 	{
-		std::cout << "\e[1;37;44m ClapTrap \e[0m " << this->_name << " is already dead 💀" << std::endl;
+		std::cout << "\e[1;37;41m 🤖 ClapTrap " << this->_name << " is already dead! \e[0m" << std::endl;
 		return;
 	}
-	unsigned int	minDamage = std::min(amount, this->_hitPoints);
-	this->_hitPoints -= minDamage;
-	std::cout	<< "\e[1;37;44m ClapTrap \e[0m " << this->_name
-				<< " took " << amount << " points of damage ⚔️";
-	if (this->_hitPoints < 1)
-		std::cout << " and is now dead 💀";
-	std::cout << std::endl;
+	this->_hitPoints -= std::min(amount, this->_hitPoints);
+	std::cout << "\e[1;37;43m 🤖 ClapTrap " << this->_name << " takes " << amount << " points of damage! \e[0m" << std::endl;
 }
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
 	if (this->_hitPoints < 1)
 	{
-		std::cout << "\e[1;37;44m ClapTrap \e[0m " << this->_name << " is dead 💀 and can't repair itself 🔧" << std::endl;
+		std::cout << "\e[1;37;41m 🤖 ClapTrap " << this->_name << " is dead, it can't be repaired \e[0m" << std::endl;
 		return;
 	}
 	if (this->_energyPoints < 1)
 	{
-		std::cout << "\e[1;37;44m ClapTrap \e[0m " << this->_name << " has no more energy points ⚡️ to repair itself 🔧" << std::endl;
+		std::cout << "\e[1;37;41m 🤖 ClapTrap " << this->_name << " is out of energy, it can't be repaired \e[0m" << std::endl;
 		return;
 	}
-	this->_energyPoints--;
-	this->_hitPoints += amount;
-	std::cout	<< "\e[1;37;44m ClapTrap \e[0m " << this->_name
-				<< " repaired itself 🔧 for " << amount
-				<< " hit points ❤️" << std::endl;
+	this->_hitPoints += std::min(amount, this->_hitPoints);
+	this->_energyPoints -= 1;
+	std::cout << "\e[1;37;44m 🤖 ClapTrap " << this->_name << " is repaired for " << amount << " points! \e[0m" << std::endl;
 }

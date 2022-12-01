@@ -5,13 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 12:54:52 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 13:53:30 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 09:23:13 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 13:25:10 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLAPTRAP_HPP
-# define CLAPTRAP_HPP
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -27,28 +26,18 @@ class ClapTrap
 
 	public:
 		ClapTrap(void);
-		ClapTrap(std::string name);
+		ClapTrap(std::string const&);
 		ClapTrap(const ClapTrap&);
 		~ClapTrap(void);
 		ClapTrap& operator=(const ClapTrap&);
 
 		// Getters
-		std::string		getName(void) const;
-		unsigned int	getHitPoints(void) const;
-		unsigned int	getEnergyPoints(void) const;
-		unsigned int	getAttackDamage(void) const;
 
 		// Setters
-		void	setName(std::string);
-		void	setHitPoints(unsigned int);
-		void	setEnergyPoints(unsigned int);
-		void	setAttackDamage(unsigned int);
 
 		// Methods
-		void	attack(const std::string& target);
+		void	attack(std::string const &target);
 		void	takeDamage(unsigned int amount);
 		void	beRepaired(unsigned int amount);
 
 };
-
-#endif
