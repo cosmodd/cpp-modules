@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 15:36:17 by mrattez           #+#    #+#             */
-/*   Updated: 2022/12/06 10:52:56 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/12/06 11:22:55 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,14 @@ void	Form::beSigned(const Bureaucrat& bureaucrat)
 	this->_signed = true;
 }
 
+void	Form::execute(const Bureaucrat& executor) const
+{
+	if (!this->_signed)
+		throw Form::NotSignedException();
+	if (executor.getGrade() > this->_reqGradeToExec)
+		throw Form::GradeTooLowException();
+}
+
 // Exceptions
 const char*	Form::GradeTooHighException::what(void) const throw ()
 {
@@ -103,3 +111,7 @@ const char*	Form::GradeTooLowException::what(void) const throw ()
 	return "Bureaucrat grade is too low !";
 }
 
+const char*	Form::NotSignedException::what(void) const throw ()
+{
+	return "Form is not signed !";
+}

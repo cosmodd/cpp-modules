@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 10:40:53 by mrattez           #+#    #+#             */
-/*   Updated: 2022/11/14 12:15:08 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/12/06 10:51:28 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,18 @@
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
+static void	title(std::string title)
+{
+	std::cout << std::endl;
+	std::cout << "\e[1;30;47m " << title << " \e[0m" << std::endl;
+	std::cout << std::endl;
+}
+
 int	main(void)
 {
 	Bureaucrat*	bureaucrat;
 	{
-		std::cout << "◻️◻️◻️◻️ CONSTRUCTOR EXCEPTIONS ◻️◻️◻️◻️" << std::endl;
+		title("CONSTRUCTOR EXCEPTIONS");
 
 		try {
 			Bureaucrat tooHigh("Dimitri", 0);
@@ -39,9 +46,8 @@ int	main(void)
 
 		delete bureaucrat;
 	}
-	std::cout << std::endl;
 	{
-		std::cout << "◻️◻️◻️◻️ METHOD EXCEPTIONS ◻️◻️◻️◻️" << std::endl;
+		title("METHOD EXCEPTIONS");
 
 		bureaucrat = new Bureaucrat("Michel", 1);
 
@@ -63,7 +69,7 @@ int	main(void)
 		}
 	}
 	{
-		std::cout << "◻️◻️◻️◻️ FORMS ◻️◻️◻️◻️" << std::endl;
+		title("FORMS");
 		Form	high("High Form", 1, 1);
 		Form	medium("Medium Form", 50, 50);
 		Form	low("Low Form", 150, 150);
@@ -78,21 +84,27 @@ int	main(void)
 		Bureaucrat	b_low("Jean", 150);
 
 		{
-			std::cout << "\e[1;37;45m ---  LOW  --- \e[0m " << std::endl;
-			b_low.signForm(high);
-			b_low.signForm(medium);
-			b_low.signForm(low);
+			std::cout << std::endl;
+			std::cout << "\e[1;37;45m LOW \e[0m " << std::endl;
+			std::cout << " "; b_low.signForm(high);
+			std::cout << " "; b_low.signForm(medium);
+			std::cout << " "; b_low.signForm(low);
 
-			std::cout << "\e[1;37;45m ---  MEDIUM  --- \e[0m " << std::endl;
-			b_medium.signForm(high);
-			b_medium.signForm(medium);
-			b_medium.signForm(low);
+			std::cout << "\e[1;37;45m MEDIUM \e[0m " << std::endl;
+			std::cout << " "; b_medium.signForm(high);
+			std::cout << " "; b_medium.signForm(medium);
+			std::cout << " "; b_medium.signForm(low);
 
-			std::cout << "\e[1;37;45m ---  HIGH  --- \e[0m " << std::endl;
-			b_high.signForm(high);
-			b_high.signForm(medium);
-			b_high.signForm(low);
+			std::cout << "\e[1;37;45m HIGH \e[0m " << std::endl;
+			std::cout << " "; b_high.signForm(high);
+			std::cout << " "; b_high.signForm(medium);
+			std::cout << " "; b_high.signForm(low);
 		}
+
+		std::cout << std::endl;
+		std::cout << high << std::endl;
+		std::cout << medium << std::endl;
+		std::cout << low << std::endl;
 	}
 	return EXIT_SUCCESS;
 }
