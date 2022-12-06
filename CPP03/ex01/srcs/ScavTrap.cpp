@@ -5,51 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 14:01:55 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 14:09:06 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 10:22:46 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 10:41:50 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void)
+ScavTrap::ScavTrap(void):
+	ClapTrap("ScavTrap")
 {
-	this->setName("ScavTrap");
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
-	std::cout << "\e[1;37;44m 🤖 ScavTrap default construction ! \e[0m" << std::endl;
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
+	std::cout << "\e[1;37;44m 🤖 ScavTrap default constructor called \e[0m" << std::endl;
 }
 
-
-ScavTrap::ScavTrap(std::string name):
+ScavTrap::ScavTrap(std::string const &name):
 	ClapTrap(name)
 {
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
-	std::cout << "\e[1;37;44m 🤖 ScavTrap " << this->getName() << " has been constructed ! \e[0m" << std::endl;
+	this->_hitPoints = 100;
+	this->_energyPoints = 50;
+	this->_attackDamage = 20;
+	std::cout << "\e[1;37;44m 🤖 ScavTrap constructor called \e[0m" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& ref)
+ScavTrap::ScavTrap(ScavTrap const &ref):
+	ClapTrap(ref)
 {
-	this->setName(ref.getName());
-	this->setHitPoints(ref.getHitPoints());
-	this->setEnergyPoints(ref.getEnergyPoints());
-	this->setAttackDamage(ref.getAttackDamage());
+	std::cout << "\e[1;37;44m 🤖 ScavTrap copy constructor called \e[0m" << std::endl;
 }
 
 ScavTrap::~ScavTrap(void)
 {
-	std::cout << "\e[1;37;41m 🤖 ScavTrap " << this->getName() << " has been destructed ! \e[0m" << std::endl;
+	std::cout << "\e[1;37;41m 🤖 ScavTrap destructor called \e[0m" << std::endl;
 }
 
-ScavTrap& ScavTrap::operator=(const ScavTrap& ref)
+ScavTrap& ScavTrap::operator=(ScavTrap const &ref)
 {
-	this->setName(ref.getName());
-	this->setHitPoints(ref.getHitPoints());
-	this->setEnergyPoints(ref.getEnergyPoints());
-	this->setAttackDamage(ref.getAttackDamage());
+	this->_name = ref._name;
+	this->_hitPoints = ref._hitPoints;
+	this->_energyPoints = ref._energyPoints;
+	this->_attackDamage = ref._attackDamage;
+	std::cout << "\e[1;37;44m 🤖 ScavTrap copy assignment operator called \e[0m" << std::endl;
 	return *this;
 }
 
@@ -58,32 +56,23 @@ ScavTrap& ScavTrap::operator=(const ScavTrap& ref)
 // Setters
 
 // Methods
-void	ScavTrap::attack(const std::string& target)
+void	ScavTrap::attack(std::string const &target)
 {
-	if (this->getHitPoints() < 1)
+	if (this->_hitPoints < 1)
 	{
-		std::cout << "\e[1;37;45m ScavTrap \e[0m " << this->getName() << " is dead 💀 and can't attack ⚔️" << std::endl;
-		return;
+		std::cout << "\e[1;37;41m 🤖 ScavTrap " << this->_name << " is dead, it can't attack \e[0m" << std::endl;
+		return ;
 	}
-	if (this->getEnergyPoints() < 1)
+	if (this->_energyPoints < 1)
 	{
-		std::cout << "\e[1;37;45m ScavTrap \e[0m " << this->getName() << " has no more energy points ⚡️ to attack ⚔️" << std::endl;
-		return;
+		std::cout << "\e[1;37;41m 🤖 ScavTrap " << this->_name << " is out of energy, it can't attack \e[0m" << std::endl;
+		return ;
 	}
-	this->_energyPoints--;
-	std::cout	<< "\e[1;37;45m ScavTrap \e[0m " << this->getName()
-				<< " attacks " << target
-				<< ", causing " << this->getAttackDamage()
-				<< " points of damage ⚔️" << std::endl;
+	this->_energyPoints -= 1;
+	std::cout << "\e[1;37;43m 🤖 ScavTrap " << this->_name << " attacks " << target << ", causing " << this->_attackDamage << " points of damage! \e[0m" << std::endl;
 }
 
 void	ScavTrap::guardGate(void) const
 {
-	if (this->getHitPoints() < 1)
-	{
-		std::cout << "\e[1;37;45m ScavTrap \e[0m " << this->getName() << " is dead 💀 and can't go in GateKeeper mode 🛡" << std::endl;
-		return;
-	}
-	std::cout	<< "\e[1;37;45m ScavTrap \e[0m " << this->getName()
-				<< " enters in GateKeeper mode 🛡" << std::endl;
+	std::cout << "\e[1;37;44m 🤖 ScavTrap " << this->_name << " has entered in Gate keeper mode \e[0m" << std::endl;
 }

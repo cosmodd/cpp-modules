@@ -5,35 +5,34 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/14 13:49:44 by mrattez           #+#    #+#             */
-/*   Updated: 2022/08/02 13:53:44 by mrattez          ###   ########.fr       */
+/*   Created: 2022/11/30 10:20:37 by mrattez           #+#    #+#             */
+/*   Updated: 2022/11/30 10:41:54 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCAVTRAP_HPP
-# define SCAVTRAP_HPP
+#pragma once
+
+#include <iostream>
+#include <string>
+#include <cmath>
 
 #include "ClapTrap.hpp"
 
 class ScavTrap: public ClapTrap
 {
-	private:
-
 	public:
 		ScavTrap(void);
-		ScavTrap(std::string name);
-		ScavTrap(const ScavTrap&);
+		ScavTrap(std::string const&);
+		ScavTrap(ScavTrap const&);
 		~ScavTrap(void);
-		ScavTrap& operator=(const ScavTrap&);
+		ScavTrap& operator=(ScavTrap const&);
 
 		// Getters
 
 		// Setters
 
 		// Methods
-		void	attack(const std::string& target);
+		void	attack(std::string const &target);
 		void	guardGate(void) const;
 
 };
-
-#endif

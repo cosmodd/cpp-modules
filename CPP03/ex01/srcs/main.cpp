@@ -6,7 +6,7 @@
 /*   By: mrattez <mrattez@student.42nice.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/14 12:54:11 by mrattez           #+#    #+#             */
-/*   Updated: 2022/07/14 14:28:13 by mrattez          ###   ########.fr       */
+/*   Updated: 2022/11/30 10:57:11 by mrattez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,35 @@
 int	main(void)
 {
 	const std::string	target = "DoctorWho";
-	ScavTrap	st("DALEK");
+	ScavTrap			st("DALEK");
 
-	for (int i = 0; i < 50 / 2; i++)
 	{
-		st.attack(target);
-		st.beRepaired(10);
-		st.beRepaired(10);
-		st.takeDamage(10);
+		std::cout << std::endl << "\e[1;30;47m ⚡️ Draining energy \e[0m" << std::endl << std::endl;
+		for (int i = 0; i < 50 / 5; i++)
+		{
+			st.attack(target);
+			st.beRepaired(0);
+			st.beRepaired(0);
+			st.beRepaired(0);
+			st.beRepaired(0);
+			st.takeDamage(2);
+		}
 	}
-	st.guardGate();
+	{
+		std::cout << std::endl << "\e[1;30;47m ⚡️No energy \e[0m" << std::endl << std::endl;
+		st.attack(target);
+		st.beRepaired(20);
+	}
+	{
+		std::cout << std::endl << "\e[1;30;47m ❤️ No health \e[0m" << std::endl << std::endl;
+		st.takeDamage(100);
+		st.attack(target);
+		st.beRepaired(20);
+		st.takeDamage(100);
+	}
+	{
+		std::cout << std::endl << "\e[1;30;47m 🤖 Exclusive methods \e[0m" << std::endl << std::endl;
+		st.guardGate();
+	}
 	return EXIT_SUCCESS;
 }
