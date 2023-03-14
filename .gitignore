@@ -1,6 +1,7 @@
 # FOLDERS
 .vscode/
 logs/
+.DS_Store
 
 # FILES
 *.o
@@ -32,3 +33,6 @@ template
 easyfind
 span
 stack
+btc
+RPN
+PMergeMe
