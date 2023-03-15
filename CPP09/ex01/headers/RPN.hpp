@@ -18,6 +18,7 @@ class RPN
 
 		// Getters
 		int	getResult(void) const;
+		int	getStackSize(void) const;
 
 		// Setters
 

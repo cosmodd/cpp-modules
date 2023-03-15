@@ -27,60 +27,53 @@ int	RPN::getResult(void) const
 	return this->_numbers.top();
 }
 
+int	RPN::getStackSize(void) const
+{
+	return this->_numbers.size();
+}
+
 // Setters
 
 // Methods
 bool	RPN::calculate(void)
 {
-	std::string::const_iterator	it = _expression.begin();
-	int							value = 0;
-	bool						waitingForOperator = false;
-
-	value = *it - '0';
-	_numbers.push(value);
-	it++;
-
-	for (; it != _expression.end(); it++)
+	for (std::string::size_type i = 0; i < _expression.size(); i++)
 	{
-		if (std::isspace(*it))
+		if (std::isspace(_expression[i]))
 			continue;
 
-		if (std::isdigit(*it) && !waitingForOperator)
+		if (std::isdigit(_expression[i]))
 		{
-			value = *it - '0';
-			_numbers.push(value);
-			waitingForOperator = true;
+			_numbers.push(_expression[i] - '0');
+			continue;
 		}
-		else if (std::strchr("+-*/", *it) && waitingForOperator)
-		{
-			char	operatorChar = *it;
-			int		firstNumber = _numbers.top(); _numbers.pop();
-			int		secondNumber = _numbers.top(); _numbers.pop();
 
-			switch (operatorChar)
-			{
-				case '+':
-					_numbers.push(secondNumber + firstNumber);
-					break;
-				case '-':
-					_numbers.push(secondNumber - firstNumber);
-					break;
-				case '*':
-					_numbers.push(secondNumber * firstNumber);
-					break;
-				case '/':
-					_numbers.push(secondNumber / firstNumber);
-					break;
-				default:
-					return false;
-			}
-
-			waitingForOperator = false;
-		}
-		else
+		if (_numbers.size() < 2)
 			return false;
-	}
 
+		int	first = _numbers.top();
+		_numbers.pop();
+		int	second = _numbers.top();
+		_numbers.pop();
+
+		switch (_expression[i])
+		{
+			case '+':
+				_numbers.push(second + first);
+				break;
+			case '-':
+				_numbers.push(second - first);
+				break;
+			case '*':
+				_numbers.push(second * first);
+				break;
+			case '/':
+				_numbers.push(second / first);
+				break;
+			default:
+				break;
+		}
+	}
 	return true;
 }
 

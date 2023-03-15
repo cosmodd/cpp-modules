@@ -44,7 +44,7 @@ bool	isValidDate(const std::string& date)
 	// Check if date is in the format YYYY-MM-DD
 	if (date[4] != '-' || date[7] != '-')
 		return (false);
- 
+
 	// Check if date is valid
 	if (!(dateStream >> year))
 		return (false);

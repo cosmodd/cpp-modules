@@ -35,7 +35,7 @@ int	main(int ac, char **av)
 
 	RPN	rpn(expression);
 
-	if (!rpn.calculate())
+	if (!rpn.calculate() || rpn.getStackSize() > 1)
 	{
 		error(INVALID_EXPRESSION);
 		return (1);

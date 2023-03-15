@@ -37,9 +37,19 @@ int	main(int ac, char **av)
 
 	try
 	{
+		struct stat		fileStat;
+
 		inputFileStream.open(av[1]);
 		if (!inputFileStream.is_open())
 			throw std::exception();
+
+		stat(av[1], &fileStat);
+		if (!S_ISREG(fileStat.st_mode))
+		{
+			if (inputFileStream.is_open())
+				inputFileStream.close();
+			throw std::exception();
+		}
 	}
 	catch(const std::exception& e)
 	{
@@ -52,9 +62,10 @@ int	main(int ac, char **av)
 
 	while (std::getline(inputFileStream, line))
 	{
-		std::stringstream	lineStream(line);
-		std::string			date;
-		float				value;
+		std::stringstream								lineStream(line);
+		std::string										date;
+		float											value;
+		std::map<std::string, float>::const_iterator	it;
 
 		if (line.empty())
 		{
@@ -91,16 +102,12 @@ int	main(int ac, char **av)
 			continue;
 		}
 
-		if (csvData.find(date) == csvData.end())
-		{
-			error("No data for date: \"" + date + "\"");
-			continue;
-		}
+		it = find_or_nearest(csvData, date);
 
-		std::cout << "\e[1;37;44m " << date << " \e[0m";
+		std::cout << "\e[1;37;44m " << it->first << " \e[0m";
 		std::cout << "\e[1;37;47m " << std::setw(10) << value << " 💰 \e[0m";
-		std::cout << "\e[1;37;46m " << std::setw(10) << csvData[date] << " 💱 \e[0m";
-		std::cout << "\e[1;37;42m " << std::setw(10) << value * csvData[date] << " 💶 \e[0m";
+		std::cout << "\e[1;37;46m " << std::setw(10) << it->second << " 💱 \e[0m";
+		std::cout << "\e[1;37;42m " << std::setw(10) << value * it->second << " 💶 \e[0m";
 		std::cout << std::endl;
 	}
 

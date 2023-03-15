@@ -2,8 +2,8 @@
 #  SOURCES                                                                     #
 ################################################################################
 
-SRCS	=	srcs/main.cpp \
-			srcs/BitcoinExchange.cpp \
+SRCS	=	srcs/BitcoinExchange.cpp \
+			srcs/main.cpp \
 
 OBJS	=	$(SRCS:.cpp=.o)
 
